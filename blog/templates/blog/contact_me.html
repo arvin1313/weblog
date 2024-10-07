@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}DevBlog - Contact Me{% endblock title %}
+{% block context %}
+
+    <section class="container" id="contact-container">
+        <div class="contact-form">
+            <h2>Contact Me</h2>
+            <p>Do you have any questions or problems? I would love to hear from you!</p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Email:</label>
+                    {#<input type="text" id="name" name="name" required>#}
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Subject:</label>
+                    {#<input type="email" id="email" name="email" required>#}
+                    {{ form.subject }}
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    {#<textarea id="message" name="message" required></textarea>#}
+                    {{ form.message }}
+                </div>
+
+                {% if request.user.is_authenticated %}
+                <button id="contact-button" type="submit">Send Message</button>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" id="contact-button-link">You must log in to send a message</a>
+                {% endif %}
+
+            </form>
+        </div>
+    </section>
+
+{% endblock context %}

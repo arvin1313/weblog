@@ -1,0 +1,69 @@
+{% load static %}
+<div class="aside">
+
+    <div class="topics">
+
+        <h2 class="h2">Search</h2>
+        <div class="newsletter" style="text-align: center">
+            <div class="wrapper">
+                <p>Find the desired article</p>
+                <form action="{% url 'blog:article_search' %}" method="get" role="search">
+                    <input type="search" name="search" placeholder="Article search" required>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="tags">
+
+        <h2 class="h2">Tags</h2>
+
+        <div class="wrapper">
+
+            {% for tag in tags %}
+                <a href="{% url 'blog:article_tag' tag.id %}">
+                    <button class="hashtag">#{{ tag }}</button>
+                </a>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <div class="contact">
+
+        <h2 class="h2">Let's Talk</h2>
+
+        <div class="wrapper">
+
+            <p>
+                For quick communication, you can contact me through PV Telegram or Instagram page.
+            </p>
+
+            <ul class="social-link" >
+
+                <a href="https://instagram.com/arvinmaroufi.ir" class="icon-box instagram" target="_blank">
+                    <i class="fa fa-instagram" style="font-size:24px"></i>
+                </a>
+
+{#                <a href="#" class="icon-box telegram">#}
+{#                    <i class="fa fa-telegram" style="font-size:24px"></i>#}
+{#                </a>#}
+
+                <a href="https://t.me/arvin_maroufi" class="icon-box telegram-user" target="_blank">
+                    <i class="fa fa-telegram" style="font-size:24px"></i>
+                </a>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,112 @@
+{% load static %}
+<header>
+
+    <div class="container">
+
+        <nav class="navbar">
+
+            <a href="{% url 'blog:home' %}">
+                <img src="{% static 'images/logo-light.svg' %}" alt="Devblog's logo" width="150" class="logo-light">
+                <img src="{% static 'images/logo-dark.svg' %}" alt="Devblog's logo" width="150" class="logo-dark">
+            </a>
+
+            <div class="btn-group">
+
+                <button class="theme-btn theme-btn-mobile light">
+                    <ion-icon name="moon" class="moon"></ion-icon>
+                    <ion-icon name="sunny" class="sun"></ion-icon>
+                </button>
+
+                <button class="nav-menu-btn">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </button>
+
+            </div>
+
+            <div class="flex-wrapper">
+
+                <ul class="desktop-nav">
+
+                    <li><a href="{% url 'blog:home' %}" class="nav-link">Home</a></li>
+
+                    <li><a href="{% url 'blog:about' %}" class="nav-link">About Me</a></li>
+
+                    <li><a href="{% url 'blog:contact' %}" class="nav-link">Contact Me</a></li>
+
+                    {% if request.user.is_authenticated %}
+                        <a class="mt-1" href="{% url 'accounts:profile_view' %}"><img src="{% static 'accounts/images/anonymous_user.png' %}" alt=""
+                                                width="30px" height="30px"
+                                                style="border-radius: 100%;"></a>
+{#                        <li class="nav-link"><a href="{% url 'accounts:profile_view' %}">{{ request.user.username }}</a></li>#}
+                        <li><a href="{% url 'accounts:logout' %}" class="nav-link">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'accounts:login' %}" class="nav-link">Login</a></li>
+                        <li><a href="{% url 'accounts:register' %}" class="nav-link">Register</a></li>
+                    {% endif %}
+
+                </ul>
+
+                <button class="theme-btn theme-btn-desktop light">
+                    <ion-icon name="moon" class="moon"></ion-icon>
+                    <ion-icon name="sunny" class="sun"></ion-icon>
+                </button>
+
+            </div>
+
+
+            <div class="mobile-nav">
+
+                <button class="nav-close-btn">
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+
+                <div class="wrapper">
+
+                    <p class="h3 nav-title">Main Menu</p>
+
+                    <ul>
+                        <li class="nav-item">
+                            <a href="{% url 'blog:home' %}" class="nav-link">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% url 'blog:about' %}" class="nav-link">About Me</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% url 'blog:contact' %}" class="nav-link">Contact</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-link">{{ request.user.username }}</li>
+                            <li><a href="{% url 'accounts:logout' %}" class="nav-link">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'accounts:login' %}" class="nav-link">Login</a></li>
+                            <li><a href="{% url 'accounts:register' %}" class="nav-link">Register</a></li>
+                        {% endif %}
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <p class="h3 nav-title">Latest Articles</p>
+
+                    {% for article in latest_articles %}
+                        <ul>
+                            <li class="nav-item">
+                                <a href="{{ article.get_absolute_url }}" class="nav-link">{{ article.title }}</a>
+                            </li>
+                        </ul>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>

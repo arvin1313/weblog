@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}DevBlog - About Me{% endblock title %}
+{% block context %}
+
+    <div class="container" id="about-container">
+        <h1 style="margin-bottom: 30px">About Me</h1>
+        <div class="about-section">
+            <div class="about-profile">
+                <img src="{% static 'images/hero.png' %}" width="200px" height="200px" alt="Julia Walker">
+            </div>
+            <div class="about-text">
+                <p>Hi, I'm Arvin Maroufi. I am a web developer working in the backend sector. I am fully specialized in
+                    Python programming language and Django framework.
+                </p>
+                <p>I love to learn new things and share my knowledge with others and help others.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock context %}

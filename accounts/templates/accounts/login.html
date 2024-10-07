@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevBlog - Login</title>
+    <!--favicon-->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <!--custom css link-->
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+</head>
+<body>
+<main>
+    <div class="container">
+        <div class="login-section" style="margin-top: 100px">
+            <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div>
+                    <label for="username">Username:</label>
+                    {#<input type="text" id="username" name="username" required>#}
+                    <span>{{ form.username }}</span>
+
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    {#<input type="password" id="password" name="password" required>#}
+                    <span>{{ form.password }}</span>
+
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="{% url 'accounts:register' %}" style="text-decoration: none">Register</a></p>
+        </div>
+    </div>
+</main>
+</body>
+</html>

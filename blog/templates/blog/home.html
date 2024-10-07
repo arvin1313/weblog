@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}DevBlog - Home{% endblock title %}
+
+{% block context %}
+
+    <main>
+
+        <!--
+          - #HERO SECTION
+        -->
+
+        <div class="hero">
+
+            <div class="container">
+
+                <div class="left">
+
+                    <h1 class="h1">
+                        Hi, I'm <b>Arvin&nbsp;Maroufi</b>.
+                        <br>Web Developer
+                    </h1>
+
+                    <p class="h3">
+                        Specialized in Python language and Django framework
+                    </p>
+
+                    <div class="btn-group">
+                        <a href="{% url 'blog:contact' %}" class="btn btn-primary">Contact Me</a>
+                        <a href="{% url 'blog:about' %}" class="btn btn-secondary">About Me</a>
+                    </div>
+
+                </div>
+
+                <div class="right">
+
+                    <div class="pattern-bg"></div>
+                    <div class="img-box">
+                        <img src="{% static 'images/hero.png' %}" width="374.438px" height="374.438px" alt="Julia Walker" class="hero-img">
+                        <div class="shape shape-1"></div>
+                        <div class="shape shape-2"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="main">
+
+            <div class="container">
+
+                <!--
+                  - BLOG SECTION
+                -->
+
+                <div class="blog">
+
+                    <h2 class="h2">Latest Articles</h2>
+
+                    <div class="blog-card-group">
+                        {% for article in latest_articles %}
+                            <div class="blog-card">
+
+                                {% if article.image_banner %}
+                                    <div class="blog-card-banner">
+                                    <img src="{{ article.image_banner.url }}"
+                                         alt="Building microservices with Dropwizard, MongoDB & Docker"
+                                         width="250" class="blog-banner-img">
+                                </div>
+                                {% else %}
+                                    <div class="blog-card-banner">
+                                    <img src="{% static 'images/image_not_available.jpg' %}"
+                                         alt="Building microservices with Dropwizard, MongoDB & Docker"
+                                         width="250" class="blog-banner-img">
+                                </div>
+                                {% endif %}
+
+                                <div class="blog-content-wrapper">
+                                    {% for category in article.category.all %}
+                                        <button class="blog-topic text-tiny" style="display: inline-block;">{{ category.title }}</button>
+                                    {% endfor %}
+                                    <h3><a href="{{ article.get_absolute_url }}" class="h3">{{ article.title }}</a></h3>
+                                    <p class="blog-text">{{ article.body|truncatewords:'20' }}</p>
+                                    <div class="wrapper-flex">
+                                        <div class="profile-wrapper">
+                                            <img src="{% static 'images/author.png' %}" alt="Julia Walker" width="50">
+                                        </div>
+                                        <div class="wrapper">
+                                            <a href="#" class="h4">{{ article.author }}</a>
+                                            <p class="text-sm">
+                                                <time datetime="2022-01-17">{{ article.created|date }}</time>
+                                                <span class="separator"></span>
+                                                <ion-icon name="time-outline"></ion-icon>
+                                                <time datetime="PT3M">{{ article.created|timesince }}</time>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <h2 class="h2">Popular Articles</h2>
+
+                    <div class="blog-card-group">
+                        {% for article in popular_articles %}
+                            <div class="blog-card">
+
+                                {% if article.image_banner %}
+                                    <div class="blog-card-banner">
+                                    <img src="{{ article.image_banner.url }}"
+                                         alt="Building microservices with Dropwizard, MongoDB & Docker"
+                                         width="250" class="blog-banner-img">
+                                </div>
+                                {% else %}
+                                    <div class="blog-card-banner">
+                                    <img src="{% static 'images/image_not_available.jpg' %}"
+                                         alt="Building microservices with Dropwizard, MongoDB & Docker"
+                                         width="250" class="blog-banner-img">
+                                </div>
+                                {% endif %}
+
+                                <div class="blog-content-wrapper">
+                                    {% for category in article.category.all %}
+                                        <button class="blog-topic text-tiny" style="display: inline-block;">{{ category.title }}</button>
+                                    {% endfor %}
+                                    <h3><a href="{{ article.get_absolute_url }}" class="h3">{{ article.title }}</a></h3>
+                                    <p class="blog-text">{{ article.body|truncatewords:'20' }}</p>
+                                    <div class="wrapper-flex">
+                                        <div class="profile-wrapper">
+                                            <img src="{% static 'images/author.png' %}" alt="Julia Walker" width="50">
+                                        </div>
+                                        <div class="wrapper">
+                                            <a href="#" class="h4">{{ article.author }}</a>
+                                            <p class="text-sm">
+                                                <time datetime="2022-01-17">{{ article.created|date }}</time>
+                                                <span class="separator"></span>
+                                                <ion-icon name="time-outline"></ion-icon>
+                                                <time datetime="PT3M">{{ article.created|timesince }}</time>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <a href="{% url 'blog:article_list' %}" class="btn load-more" style="margin-left: 290px">Load More</a>
+
+                </div>
+
+
+                <!--
+                  - ASIDE
+                -->
+
+                {% include 'includes/sidebar.html' %}
+
+            </div>
+
+        </div>
+
+    </main>
+
+{% endblock context %}

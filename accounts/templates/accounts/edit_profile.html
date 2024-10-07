@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}DevBlog - Edit Profile{% endblock %}
+
+{% block context %}
+    <div class="container" id="edit-container">
+        <div class="profile-section">
+            <div class="profile-form">
+                <h1 id="edit-h1">Edit Profile</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="name">First Name:</label>
+                    {#<input type="text" id="first_name" name="first_name" placeholder="Your First Name" required>#}
+                    {{ form.first_name }}
+                    <label for="name">Last Name:</label>
+                    {#<input type="text" id="last_name" name="last_name" placeholder="Your Last Name" required>#}
+                    {{ form.last_name }}
+                    <label for="email">Email:</label>
+                    {#<input type="email" id="email" name="email" placeholder="Your Email" required>#}
+                    {{ form.email }}
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock context %}

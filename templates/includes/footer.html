@@ -1,0 +1,52 @@
+{% load static %}
+<footer>
+
+    <div class="container">
+
+        <div class="wrapper">
+
+            <a href="{% url 'blog:home' %}" class="footer-logo">
+                <img src="{% static 'images/logo-light.svg' %}" alt="DevBlog's Logo" width="150" class="logo-light">
+                <img src="{% static 'images/logo-dark.svg' %}" alt="DevBlog's Logo" width="150" class="logo-dark">
+            </a>
+
+            <p class="footer-text">
+                With us, you can learn about programming and its fields
+            </p>
+
+        </div>
+
+        <div class="wrapper">
+
+            <p class="footer-title">Quick Links</p>
+            <li><a href="{% url 'blog:article_list' %}" class="footer-link">Articles List</a></li>
+
+            <li><a href="{% url 'blog:about' %}" class="footer-link">About Us</a></li>
+
+            <li><a href="{% url 'blog:contact' %}" class="footer-link">Contact Us</a></li>
+
+        </div>
+
+
+        <div class="wrapper">
+
+            <p class="footer-title">Tags</p>
+            <div class="tags">
+
+                {% for tag in tags %}
+                    <a href="{% url 'blog:article_tag' tag.id %}">
+                        <button class="hashtag mb-1">#{{ tag }}</button>
+                    </a>
+                {% endfor %}
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <p class="copyright">
+        <a href="{% url 'blog:home' %}">DevBlog</a>
+    </p>
+
+</footer>

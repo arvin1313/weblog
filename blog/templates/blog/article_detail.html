@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ articles.title }}{% endblock title %}
+
+{% block context %}
+
+    <main id="main_detail">
+        <article>
+            <div class="post-image">
+                <img src="{{ articles.image_detail.url }}" alt="Blog Post Image">
+            </div>
+            <div class="post-content">
+                {% for category in articles.category.all %}
+                    <button class="blog-topic-detail text-tiny" style="display: inline-block;">{{ category.title }}</button>
+                {% endfor %}
+
+                <h2>{{ articles.title }}</h2>
+                <p>{{ articles.body }}</p>
+            </div>
+            <div class="post-meta">
+                <img id='author-profile' src="{% static 'images/author.png' %}" alt="Julia Walker" width="50">
+                <span class="author">{{ articles.author }}</span>
+                <span class="date">{{ articles.created|date }}</span>
+                <ion-icon name="time-outline"></ion-icon>
+                <time datetime="PT3M">{{ articles.created|timesince }}</time>
+            </div>
+        </article>
+    </main>
+
+{% endblock %}
